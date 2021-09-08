@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float attackDistance = 2.0f; //should be 0 or very small for melee enemies
     public float aggroRange;
     bool isAggro = false;
+    bool facingRight = true;
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +30,15 @@ public class EnemyMovement : MonoBehaviour
             if (isAggro)
             {
                 int xDirection = player.transform.position.x < gameObject.transform.position.x ? -1 : 1;
-                gameObject.transform.localScale = new Vector3(xDirection, 1, 1);
                 movement.x = xDirection;
-                movement.y = player.transform.position.y < gameObject.transform.position.y ? -1 : 1;
                 
+                if(xDirection == 1 && facingRight || xDirection == -1 && !facingRight){
+                    GetComponent<SpriteRenderer>().flipX();
+                    facingRight = !facingRight;
+                }
+
+                movement.y = player.transform.position.y < gameObject.transform.position.y ? -1 : 1;
+
                 if(!TargetInAttackRange(player.transform.position)) 
                     myBody.MovePosition(myBody.position + movement * moveSpeed * Time.fixedDeltaTime);
             }
