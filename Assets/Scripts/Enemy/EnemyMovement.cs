@@ -36,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
             if (isAggro)
             {
                 int xDirection = player.transform.position.x < gameObject.transform.position.x ? -1 : 1;
-                gameObject.transform.localScale.x = xDirection;
+                gameObject.transform.localScale = new Vector3(xDirection, 1, 1);
                 movement.x = xDirection;
                 movement.y = player.transform.position.y < gameObject.transform.position.y ? -1 : 1;
                 if(!TargetInAttackRange(player.transform.position)) myBody.MovePosition(myBody.position + movement * moveSpeed * Time.fixedDeltaTime);
