@@ -16,15 +16,8 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isAggro = false;
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
-        if (myBody == null)
-        {
-            myBody = GetComponent<Rigidbody2D>();
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        myBody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -39,7 +32,9 @@ public class EnemyMovement : MonoBehaviour
                 gameObject.transform.localScale = new Vector3(xDirection, 1, 1);
                 movement.x = xDirection;
                 movement.y = player.transform.position.y < gameObject.transform.position.y ? -1 : 1;
-                if(!TargetInAttackRange(player.transform.position)) myBody.MovePosition(myBody.position + movement * moveSpeed * Time.fixedDeltaTime);
+                
+                if(!TargetInAttackRange(player.transform.position)) 
+                    myBody.MovePosition(myBody.position + movement * moveSpeed * Time.fixedDeltaTime);
             }
         }
     }
