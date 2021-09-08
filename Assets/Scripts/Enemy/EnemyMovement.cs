@@ -31,10 +31,10 @@ public class EnemyMovement : MonoBehaviour
             {
                 int xDirection = player.transform.position.x < gameObject.transform.position.x ? -1 : 1;
                 movement.x = xDirection;
-                
+
                 if(xDirection == 1 && facingRight || xDirection == -1 && !facingRight){
-                    GetComponent<SpriteRenderer>().flipX();
                     facingRight = !facingRight;
+                    GetComponent<SpriteRenderer>().flipX = facingRight;
                 }
 
                 movement.y = player.transform.position.y < gameObject.transform.position.y ? -1 : 1;
